@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graduate to GREAT 2026 | Anchor &amp; Ascend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --cream: #F5F0E8;
+    --warm-white: #FDFAF5;
+    --accent: #1A3A5C;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--cream); opacity: 0.75; text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    padding: 0.55rem 1.4rem; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 8rem 4rem 6rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(26,58,92,0.5) 0%, transparent 70%),
+      linear-gradient(180deg, #0D1B2A 0%, #0A1520 100%);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(201,168,76,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; text-align: center; }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); opacity: 0.5;
+  }
+  .hero-program-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    color: rgba(245,240,232,0.45); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400; line-height: 1.0; margin-bottom: 0.3rem; letter-spacing: -0.01em;
+  }
+  .hero-title .great { color: var(--gold); font-style: italic; }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(245,240,232,0.5); margin-bottom: 0.8rem;
+    font-weight: 400; letter-spacing: 0.04em;
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: rgba(245,240,232,0.75); margin-bottom: 3rem;
+    font-weight: 400; font-style: italic; line-height: 1.4;
+  }
+  .hero-actions { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 0.9rem 2.2rem; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--cream);
+    padding: 0.9rem 2.2rem; border: 1px solid rgba(245,240,232,0.3); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 400;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none; transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    margin-top: 5rem; display: flex; justify-content: center; gap: 5rem;
+    padding-top: 3rem; border-top: 1px solid var(--border);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 600; color: var(--gold); display: block;
+  }
+  .stat-label {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(245,240,232,0.45); margin-top: 0.3rem;
+  }
+
+  /* SECTION BASE */
+  section { padding: 7rem 4rem; }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400;
+    line-height: 1.15; margin-bottom: 1.5rem;
+  }
+  .section-body { font-size: 0.95rem; line-height: 1.8; color: rgba(245,240,232,0.65); max-width: 600px; }
+  .divider { width: 40px; height: 1px; background: var(--gold); margin: 1.5rem 0; opacity: 0.6; }
+
+  /* ABOUT */
+  .about { background: var(--warm-white); color: var(--navy); }
+  .about-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .about .section-title { color: var(--navy); }
+  .about .section-body { color: rgba(13,27,42,0.65); }
+  .about .section-tag { color: var(--gold); }
+  .about .divider { background: var(--gold); }
+  .about-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .about-num-card { background: var(--navy); padding: 1.8rem 1.5rem; border-radius: 2px; }
+  .about-num-card .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600; color: var(--gold); display: block; margin-bottom: 0.4rem;
+  }
+  .about-num-card .lbl {
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.5);
+  }
+
+  /* PILLARS */
+  .pillars { background: #0A1520; }
+  .pillars-inner { max-width: 1100px; margin: 0 auto; }
+  .pillars-header { text-align: center; margin-bottom: 4rem; }
+  .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .pillar-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .pillar-card:hover { background: rgba(201,168,76,0.05); }
+  .pillar-number {
+    font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 600;
+    color: rgba(201,168,76,0.12); position: absolute; top: 1rem; right: 1.5rem; line-height: 1;
+  }
+  .pillar-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .pillar-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 1rem; }
+  .pillar-desc { font-size: 0.88rem; line-height: 1.75; color: rgba(245,240,232,0.55); }
+  .pillar-features { margin-top: 1.5rem; list-style: none; }
+  .pillar-features li {
+    font-size: 0.82rem; color: rgba(245,240,232,0.5);
+    padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .pillar-features li::before { content: ''; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* PROGRAM */
+  .program { background: var(--navy); }
+  .program-inner { max-width: 1100px; margin: 0 auto; }
+  .day-tabs { display: flex; gap: 0; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+  .day-tab {
+    padding: 0.8rem 2rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; color: rgba(245,240,232,0.4); border-bottom: 2px solid transparent;
+    margin-bottom: -1px; transition: all 0.2s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .day-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .schedule-grid { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+  .schedule-header, .schedule-cell { background: var(--navy); padding: 0.8rem 1rem; font-size: 0.78rem; }
+  .schedule-header { color: var(--gold); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .schedule-cell { color: rgba(245,240,232,0.65); line-height: 1.5; }
+  .schedule-cell.plenary { background: rgba(201,168,76,0.06); color: var(--gold); font-weight: 500; }
+  .time-cell { color: rgba(245,240,232,0.35); font-size: 0.73rem; }
+
+  /* LOCATIONS */
+  .locations { background: var(--warm-white); color: var(--navy); }
+  .locations-inner { max-width: 1100px; margin: 0 auto; }
+  .locations-header { text-align: center; margin-bottom: 4rem; }
+  .locations-header .section-title { color: var(--navy); }
+  .locations-header .section-tag { color: var(--gold); }
+  .locations-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .location-card { background: var(--navy); color: var(--cream); padding: 2.5rem 2rem; border-radius: 2px; }
+  .location-region { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+  .location-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .location-date { font-size: 0.82rem; color: rgba(245,240,232,0.45); margin-bottom: 1.5rem; }
+  .location-capacity { font-size: 0.78rem; color: rgba(245,240,232,0.5); }
+
+  /* PATHWAY SECTION */
+  .pathways { background: #0A1520; padding: 7rem 4rem; }
+  .pathways-inner { max-width: 1100px; margin: 0 auto; }
+  .pathways-header { text-align: center; margin-bottom: 4rem; }
+  .pathways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .pathway-card {
+    border: 1px solid var(--border); padding: 2.5rem 2rem;
+    border-radius: 2px; cursor: pointer; transition: all 0.3s;
+    position: relative; overflow: hidden;
+    background: rgba(255,255,255,0.02);
+  }
+  .pathway-card:hover { background: rgba(201,168,76,0.06); border-color: rgba(201,168,76,0.4); }
+  .pathway-card.active { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.5); }
+  .pathway-icon {
+    font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 600;
+    color: rgba(201,168,76,0.2); display: block; margin-bottom: 1rem; line-height: 1;
+  }
+  .pathway-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+  .pathway-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.8rem; }
+  .pathway-desc { font-size: 0.83rem; line-height: 1.7; color: rgba(245,240,232,0.5); margin-bottom: 1.2rem; }
+  .pathway-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pathway-tag {
+    font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem; border: 1px solid rgba(201,168,76,0.25);
+    color: rgba(201,168,76,0.6); border-radius: 1px;
+  }
+  .pathway-cta {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy); background: var(--gold);
+    padding: 0.65rem 1.3rem; border-radius: 2px;
+    border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .pathway-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* FORMS SECTION */
+  .forms-section { background: var(--navy); padding: 7rem 4rem; }
+  .forms-inner { max-width: 800px; margin: 0 auto; }
+  .form-panel { display: none; }
+  .form-panel.active { display: block; }
+  .form-header { text-align: center; margin-bottom: 3rem; }
+  .form-back {
+    background: none; border: none; color: rgba(245,240,232,0.4);
+    font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: color 0.2s; padding: 0;
+  }
+  .form-back:hover { color: var(--gold); }
+  .form-box {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    padding: 3rem; border-radius: 2px;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-label {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+  }
+  .form-input, .form-select, .form-textarea {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    color: var(--cream); padding: 0.75rem 1rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 300;
+    border-radius: 2px; outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(201,168,76,0.5); }
+  .form-select option { background: var(--navy); }
+  .form-textarea { resize: vertical; min-height: 90px; }
+  .form-submit {
+    width: 100%; background: var(--gold); color: var(--navy);
+    padding: 1rem; border: none; border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+  .form-submit:disabled { opacity: 0.5; cursor: default; }
+  .form-note {
+    text-align: center; font-size: 0.72rem; color: rgba(245,240,232,0.25);
+    margin-top: 1rem; line-height: 1.6;
+  }
+  .form-success {
+    text-align: center; padding: 3rem 2rem; display: none;
+  }
+  .form-success-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .form-success-body { font-size: 0.88rem; color: rgba(245,240,232,0.55); line-height: 1.7; }
+  .inline-notice {
+    background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px; padding: 0.8rem 1rem; margin-bottom: 1.5rem;
+    font-size: 0.78rem; color: rgba(245,240,232,0.55); line-height: 1.6;
+  }
+  .inline-notice strong { color: rgba(201,168,76,0.8); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    background: #060D15; padding: 3rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+  .footer-legal { font-size: 0.73rem; color: rgba(245,240,232,0.25); text-align: right; line-height: 1.6; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.73rem; color: rgba(245,240,232,0.35); text-decoration: none; transition: color 0.2s; letter-spacing: 0.05em; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.55s; }
+  .hero-content > *:nth-child(6) { animation-delay: 0.65s; }
+  .hero-stats { animation: fadeUp 0.8s ease 0.9s forwards; opacity: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .pathways, .forms-section { padding: 5rem 1.5rem; }
+    .about-inner, .pillars-grid, .locations-grid, .pathways-grid, .form-grid { grid-template-columns: 1fr; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-stats { gap: 2rem; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-legal { text-align: center; }
+    .form-box { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Anchor &amp; Ascend</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">Program</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#pathways">Get Involved</a></li>
+  </ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ustle · 2026 · Philippines</div>
+    <h1 class="hero-title">Graduate to <span class="great">GREAT</span></h1>
+    <p class="hero-subtitle">The Pioneering Talent Accelerator Summit</p>
+    <p class="hero-tagline">Building leaders of tomorrow through<br>rooted values and rising careers.</p>
+    <div class="hero-actions">
+      <a href="#pathways" class="btn-primary">Get Involved</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">1,500</span>
+        <span class="stat-label">Reserved Access</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2,400+</span>
+        <span class="stat-label">Colleges &amp; Universities</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">1M</span>
+        <span class="stat-label">Filipino Scholars Network</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <p class="section-tag">The Opportunity</p>
+      <h2 class="section-title">Why Graduate to GREAT — Why Now</h2>
+      <div class="divider"></div>
+      <p class="section-body">The Philippines faces a critical crossroads. Over 12.7 million jobs are exposed to Generative AI disruption. Yet 50% of businesses cite the lack of digital skills as their #1 barrier to growth. The gap between what graduates know and what employers need has never been wider.</p>
+      <br>
+      <p class="section-body">Graduate to GREAT bridges that gap — with radical clarity, practical AI skills, and the professional networks that matter.</p>
+    </div>
+    <div class="about-numbers">
+      <div class="about-num-card">
+        <span class="num">12.7M</span>
+        <span class="lbl">PH jobs AI-exposed</span>
+      </div>
+      <div class="about-num-card">
+        <span class="num">5.8%</span>
+        <span class="lbl">National unemployment</span>
+      </div>
+      <div class="about-num-card">
+        <span class="num">50%+</span>
+        <span class="lbl">Businesses cite skills gap</span>
+      </div>
+      <div class="about-num-card">
+        <span class="num">0–5yr</span>
+        <span class="lbl">Early-career focus</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <div class="pillars-header">
+      <p class="section-tag">The Program</p>
+      <h2 class="section-title">Two Pillars. One Ecosystem.</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <span class="pillar-number">01</span>
+        <p class="pillar-tag">In-Person Summit</p>
+        <h3 class="pillar-title">The 2-Day Event</h3>
+        <p class="pillar-desc">A structured, immersive G-R-E-A-T Roadmap experience for 500 scholars per major island, building the AI survival mindset and augmentation edge every employer wants.</p>
+        <ul class="pillar-features">
+          <li>AI Audit Lab — identify your automation risk</li>
+          <li>Malasakit Prompting — culturally-aware AI communication</li>
+          <li>Salary &amp; Contract Battle simulation</li>
+          <li>Purpose Compass &amp; Task Workflow Lab</li>
+          <li>Live GGG activation on GraduateToGreat.com</li>
+        </ul>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-number">02</span>
+        <p class="pillar-tag">Digital Platform</p>
+        <h3 class="pillar-title">GraduateToGreat.com</h3>
+        <p class="pillar-desc">An AI-powered career ecosystem beyond a job board — matching scholars with ethical employers, tracking 90-day success, and connecting brands with highly qualified early-career professionals.</p>
+        <ul class="pillar-features">
+          <li>AI-powered job matching and CV scanning</li>
+          <li>Automated employer outreach on match</li>
+          <li>Income-aware targeted partner opportunities (DPA-compliant)</li>
+          <li>AI-readiness badges and micro-credentials</li>
+          <li>1,000,000 sign-up target by December 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM SCHEDULE -->
+<section class="program">
+  <div class="program-inner">
+    <p class="section-tag">Event Program</p>
+    <h2 class="section-title">The G-R-E-A-T Roadmap</h2>
+    <div class="divider"></div>
+    <p class="section-body" style="margin-bottom: 2.5rem;">167 scholars per breakout room. 3 rooms. Synchronized sessions built around the 5 pillars: Grounding, Readying, Engaging, Aligning, Taking Off.</p>
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="showDay(1, this)">Day 1 — The Foundation</button>
+      <button class="day-tab" onclick="showDay(2, this)">Day 2 — The Ascent</button>
+    </div>
+    <div id="day1-schedule">
+      <div class="schedule-grid">
+        <div class="schedule-header">Time</div>
+        <div class="schedule-header">Room A</div>
+        <div class="schedule-header">Room B</div>
+        <div class="schedule-header">Room C</div>
+        <div class="time-cell schedule-cell">08:00</div>
+        <div class="schedule-cell plenary" style="grid-column: 2 / -1;">Experience Tunnel &amp; Registration — All 500 in Plenary</div>
+        <div class="time-cell schedule-cell">08:45</div>
+        <div class="schedule-cell plenary" style="grid-column: 2 / -1;">Plenary Briefing — All 500</div>
+        <div class="time-cell schedule-cell">09:45</div>
+        <div class="schedule-cell">AI Audit Lab</div><div class="schedule-cell">AI Audit Lab</div><div class="schedule-cell">AI Audit Lab</div>
+        <div class="time-cell schedule-cell">10:25</div>
+        <div class="schedule-cell">Anchoring: Who Am I?</div><div class="schedule-cell">Anchoring: Who Am I?</div><div class="schedule-cell">Anchoring: Who Am I?</div>
+        <div class="time-cell schedule-cell">11:25</div>
+        <div class="schedule-cell plenary" style="grid-column: 2 / -1;">The Resilient Pilot: AI for Well-being — Plenary</div>
+        <div class="time-cell schedule-cell">13:20</div>
+        <div class="schedule-cell">Malasakit Prompting</div><div class="schedule-cell">Malasakit Prompting</div><div class="schedule-cell">Malasakit Prompting</div>
+        <div class="time-cell schedule-cell">14:10</div>
+        <div class="schedule-cell">The Verified Edge</div><div class="schedule-cell">The Verified Edge</div><div class="schedule-cell">The Verified Edge</div>
+        <div class="time-cell schedule-cell">15:50</div>
+        <div class="schedule-cell">Salary &amp; Contract Battle</div><div class="schedule-cell">Salary &amp; Contract Battle</div><div class="schedule-cell">Salary &amp; Contract Battle</div>
+        <div class="time-cell schedule-cell">16:50</div>
+        <div class="schedule-cell plenary" style="grid-column: 2 / -1;">Grand Synthesis &amp; Pillar 2 Unlock — Plenary</div>
+      </div>
+    </div>
+    <div id="day2-schedule" style="display:none;">
+      <div class="schedule-grid">
+        <div class="schedule-header">Time</div>
+        <div class="schedule-header">Room A</div>
+        <div class="schedule-header">Room B</div>
+        <div class="schedule-header">Room C</div>
+        <div class="time-cell schedule-cell">08:30</div>
+        <div class="schedule-cell">The Purpose Compass</div><div class="schedule-cell">The Purpose Compass</div><div class="schedule-cell">The Purpose Compass</div>
+        <div class="time-cell schedule-cell">10:30</div>
+        <div class="schedule-cell">Mindset &amp; Culture Lab</div><div class="schedule-cell">Mindset &amp; Culture Lab</div><div class="schedule-cell">Mindset &amp; Culture Lab</div>
+        <div class="time-cell schedule-cell">13:15</div>
+        <div class="schedule-cell">Task Workflow Lab</div><div class="schedule-cell">Task Workflow Lab</div><div class="schedule-cell">Task Workflow Lab</div>
+        <div class="time-cell schedule-cell">15:45</div>
+        <div class="schedule-cell">GGG: Game to Graduate to Great</div><div class="schedule-cell">GGG: Game to Graduate to Great</div><div class="schedule-cell">GGG: Game to Graduate to Great</div>
+        <div class="time-cell schedule-cell">16:15</div>
+        <div class="schedule-cell plenary" style="grid-column: 2 / -1;">The Ascend Commitment — Grand Ceremony, All 500</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section class="locations" id="locations">
+  <div class="locations-inner">
+    <div class="locations-header">
+      <p class="section-tag">Where We're Going</p>
+      <h2 class="section-title" style="color: var(--navy);">Three Islands. One Movement.</h2>
+    </div>
+    <div class="locations-grid">
+      <div class="location-card">
+        <p class="location-region">Major Island I</p>
+        <h3 class="location-name">Luzon</h3>
+        <p class="location-date">TBD · 2026</p>
+        <p class="location-capacity">500 Scholar Slots · Metro Manila Area</p>
+      </div>
+      <div class="location-card">
+        <p class="location-region">Major Island II</p>
+        <h3 class="location-name">Visayas</h3>
+        <p class="location-date">TBD · 2026</p>
+        <p class="location-capacity">500 Scholar Slots · Cebu Area</p>
+      </div>
+      <div class="location-card">
+        <p class="location-region">Major Island III</p>
+        <h3 class="location-name">Mindanao</h3>
+        <p class="location-date">TBD · 2026</p>
+        <p class="location-capacity">500 Scholar Slots · Davao Area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED — THREE PATHWAYS -->
+<section class="pathways" id="pathways">
+  <div class="pathways-inner">
+    <div class="pathways-header">
+      <p class="section-tag">Get Involved</p>
+      <h2 class="section-title">Choose Your Path</h2>
+      <p style="color: rgba(245,240,232,0.5); font-size: 0.9rem; max-width: 500px; margin: 0 auto; line-height: 1.7;">
+        Three distinct ways to be part of Graduate to GREAT 2026. Each pathway has its own purpose, commitments, and impact.
+      </p>
+    </div>
+    <div class="pathways-grid">
+
+      <!-- SCHOLAR -->
+      <div class="pathway-card" id="card-scholar" onclick="openForm('scholar')">
+        <span class="pathway-icon">01</span>
+        <p class="pathway-label">For Students</p>
+        <h3 class="pathway-title">Scholar</h3>
+        <p class="pathway-desc">Reserved for scholars who are ready to step into their careers with clarity, purpose, and an edge. Slots are limited to 500 per major island and extended through our network of community partners — because great opportunities should reach the right people.</p>
+        <div class="pathway-tags">
+          <span class="pathway-tag">Free to attend</span>
+          <span class="pathway-tag">By invitation</span>
+          <span class="pathway-tag">All majors</span>
+        </div>
+        <button class="pathway-cta" onclick="openForm('scholar')">Apply for Scholar Reserved Access</button>
+      </div>
+
+      <!-- PARTNER -->
+      <div class="pathway-card" id="card-partner" onclick="openForm('partner')">
+        <span class="pathway-icon">02</span>
+        <p class="pathway-label">For Organizations</p>
+        <h3 class="pathway-title">Partner</h3>
+        <p class="pathway-desc">For NGOs, government agencies, universities, scholarship programs, and foundations who believe in the power of community to shape careers. Partners contribute through shared networks, aligned advocacy, and meaningful presence — investing in people, not transactions.</p>
+        <div class="pathway-tags">
+          <span class="pathway-tag">Community Building</span>
+        </div>
+        <button class="pathway-cta" onclick="openForm('partner')">Become a Partner</button>
+      </div>
+
+      <!-- SPONSOR -->
+      <div class="pathway-card" id="card-sponsor" onclick="openForm('sponsor')">
+        <span class="pathway-icon">03</span>
+        <p class="pathway-label">For Corporations</p>
+        <h3 class="pathway-title">Sponsor</h3>
+        <p class="pathway-desc">For forward-thinking corporations committed to shaping the next generation of Philippine talent. Sponsorship is a strategic investment in national growth — with direct visibility, measurable impact, and access to a curated pipeline of early-career professionals across three major islands.</p>
+        <div class="pathway-tags">
+          <span class="pathway-tag">Strategic Investment</span>
+          <span class="pathway-tag">Brand Visibility</span>
+          <span class="pathway-tag">Talent Pipeline</span>
+          <span class="pathway-tag">CSR &amp; Employer Brand</span>
+        </div>
+        <button class="pathway-cta" onclick="openForm('sponsor')">Explore Sponsorship</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FORMS SECTION -->
+<section class="forms-section" id="forms">
+  <div class="forms-inner">
+
+    <!-- SCHOLAR FORM -->
+    <div class="form-panel" id="form-scholar">
+      <button class="form-back" onclick="closeForm()">← Back to pathways</button>
+      <div class="form-header">
+        <p class="section-tag">Scholar Application</p>
+        <h2 class="section-title">Apply for Reserved Access</h2>
+        <p style="color: rgba(245,240,232,0.5); font-size: 0.88rem; max-width: 480px; margin: 0.8rem auto 0; line-height: 1.7;">
+          Limited to 500 slots per major island. Applications are reviewed by your community partner. You must be referred by a participating school or organization.
+        </p>
+      </div>
+      <div class="form-box">
+        <div id="scholar-success" class="form-success">
+          <p class="form-success-title">Application Received</p>
+          <p class="form-success-body">Thank you for applying. Your community partner will be in touch to confirm your slot. Watch your email for next steps.</p>
+        </div>
+        <form id="scholar-form" action="https://formspree.io/f/REPLACE_SCHOLAR_ID" method="POST" onsubmit="handleSubmit(event, 'scholar')">
+          <input type="hidden" name="_subject" value="New Scholar Application — Graduate to GREAT 2026">
+          <input type="hidden" name="referred_by" id="scholar-referred-by">
+          <div class="inline-notice">
+            <strong>Referred by a partner?</strong> If your school or organization sent you a link, your referral is automatically captured. Otherwise, please note your referring organization in the message field.
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="full_name" class="form-input" placeholder="Juan dela Cruz" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" name="email" class="form-input" placeholder="juan@university.edu.ph" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile Number *</label>
+              <input type="tel" name="mobile" class="form-input" placeholder="+63 9XX XXX XXXX" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">University / School *</label>
+              <input type="text" name="university" class="form-input" placeholder="University of the Philippines" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Degree Program *</label>
+              <input type="text" name="degree" class="form-input" placeholder="BS Business Administration" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Year Level *</label>
+              <select name="year_level" class="form-select" required>
+                <option value="">Select...</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+                <option>5th Year</option>
+                <option>Graduate Student</option>
+                <option>Recent Graduate (0–2 years)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Island *</label>
+              <select name="island" class="form-select" required>
+                <option value="">Select...</option>
+                <option>Luzon</option>
+                <option>Visayas</option>
+                <option>Mindanao</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Scholarship / Affiliation</label>
+              <input type="text" name="scholarship" class="form-input" placeholder="DOST, CHED, Private, None">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Why do you want to attend? *</label>
+              <textarea name="motivation" class="form-textarea" placeholder="Tell us what brought you here and what you hope to take away..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="scholar-submit">Submit Application</button>
+          <p class="form-note">Data collected in compliance with the Philippine Data Privacy Act of 2012. Your information will not be shared with third parties without your consent.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- PARTNER FORM -->
+    <div class="form-panel" id="form-partner">
+      <button class="form-back" onclick="closeForm()">← Back to pathways</button>
+      <div class="form-header">
+        <p class="section-tag">Partner Inquiry</p>
+        <h2 class="section-title">Become a Community Partner</h2>
+        <p style="color: rgba(245,240,232,0.5); font-size: 0.88rem; max-width: 480px; margin: 0.8rem auto 0; line-height: 1.7;">
+          For NGOs, government agencies, universities, scholarship bodies, and foundations. We welcome partnerships grounded in shared values, community trust, and collective impact.
+        </p>
+      </div>
+      <div class="form-box">
+        <div id="partner-success" class="form-success">
+          <p class="form-success-title">Inquiry Received</p>
+          <p class="form-success-body">Thank you for your interest in partnering with us. Our team will reach out within 2 business days to discuss next steps.</p>
+        </div>
+        <form id="partner-form" action="https://formspree.io/f/REPLACE_PARTNER_ID" method="POST" onsubmit="handleSubmit(event, 'partner')">
+          <input type="hidden" name="_subject" value="New Partner Inquiry — Graduate to GREAT 2026">
+          <div class="inline-notice">
+            <strong>Partnerships are built on contribution, not transaction.</strong> Whether through scholar referrals, venue support, facilitation, community reach, or co-branding — every form of meaningful contribution is welcome. We honor each partner's context and design the arrangement accordingly.
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Organization Name *</label>
+              <input type="text" name="org_name" class="form-input" placeholder="Gawad Kalinga Foundation" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Person *</label>
+              <input type="text" name="contact_name" class="form-input" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" name="email" class="form-input" placeholder="contact@organization.org" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Number</label>
+              <input type="tel" name="phone" class="form-input" placeholder="+63 9XX XXX XXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Organization Type *</label>
+              <select name="org_type" class="form-select" required>
+                <option value="">Select type...</option>
+                <option>NGO / Foundation</option>
+                <option>Government Agency</option>
+                <option>State University or College</option>
+                <option>Private University</option>
+                <option>Scholarship Program</option>
+                <option>Professional Association</option>
+                <option>Religious Institution</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Island *</label>
+              <select name="island" class="form-select" required>
+                <option value="">Select...</option>
+                <option>Luzon</option>
+                <option>Visayas</option>
+                <option>Mindanao</option>
+                <option>All Islands</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">How can you contribute? *</label>
+              <select name="contribution_type" class="form-select" required>
+                <option value="">Select primary contribution...</option>
+                <option>Scholar Referrals (nominate scholars from our network)</option>
+                <option>Venue &amp; Logistics Support</option>
+                <option>Facilitation &amp; Program Support</option>
+                <option>Community Reach &amp; Promotion</option>
+                <option>Co-Branding &amp; Advocacy</option>
+                <option>Multiple — I'll share more below</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Scholar Quota</label>
+              <input type="number" name="scholar_quota" class="form-input" placeholder="e.g. 25">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Tell us about your organization and what you'd like to contribute *</label>
+              <textarea name="message" class="form-textarea" placeholder="Briefly describe your organization, the scholars or communities you serve, and how you envision contributing to Graduate to GREAT..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="partner-submit">Submit Partner Inquiry</button>
+          <p class="form-note">Reviewed within 2 business days. Data collected in compliance with the Philippine Data Privacy Act of 2012.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- SPONSOR FORM -->
+    <div class="form-panel" id="form-sponsor">
+      <button class="form-back" onclick="closeForm()">← Back to pathways</button>
+      <div class="form-header">
+        <p class="section-tag">Sponsor Inquiry</p>
+        <h2 class="section-title">Invest in Filipino Talent</h2>
+        <p style="color: rgba(245,240,232,0.5); font-size: 0.88rem; max-width: 480px; margin: 0.8rem auto 0; line-height: 1.7;">
+          For corporations ready to align their brand with purpose — gaining visibility, talent access, and a lasting legacy in the Philippine workforce landscape.
+        </p>
+      </div>
+      <div class="form-box">
+        <div id="sponsor-success" class="form-success">
+          <p class="form-success-title">Inquiry Received</p>
+          <p class="form-success-body">Thank you for your interest in sponsoring Graduate to GREAT. Our team will be in touch within 2 business days with our sponsorship deck and available tiers.</p>
+        </div>
+        <form id="sponsor-form" action="https://formspree.io/f/REPLACE_SPONSOR_ID" method="POST" onsubmit="handleSubmit(event, 'sponsor')">
+          <input type="hidden" name="_subject" value="New Sponsor Inquiry — Graduate to GREAT 2026">
+          <div class="inline-notice">
+            <strong>Transparency is a core value of Graduate to GREAT.</strong> All program investments are structured with full accountability — directed precisely toward the initiatives and experiences that serve our scholars and the broader community.
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Company Name *</label>
+              <input type="text" name="company_name" class="form-input" placeholder="Acme Philippines Inc." required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Person *</label>
+              <input type="text" name="contact_name" class="form-input" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" name="email" class="form-input" placeholder="you@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Number</label>
+              <input type="tel" name="phone" class="form-input" placeholder="+63 9XX XXX XXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Industry *</label>
+              <select name="industry" class="form-select" required>
+                <option value="">Select industry...</option>
+                <option>Banking &amp; Financial Services</option>
+                <option>Technology &amp; Telecommunications</option>
+                <option>Fast-Moving Consumer Goods</option>
+                <option>Real Estate &amp; Construction</option>
+                <option>Healthcare &amp; Pharmaceuticals</option>
+                <option>Retail &amp; E-Commerce</option>
+                <option>Manufacturing &amp; Industry</option>
+                <option>Media &amp; Advertising</option>
+                <option>BPO &amp; Shared Services</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Size</label>
+              <select name="company_size" class="form-select">
+                <option value="">Select...</option>
+                <option>SME (under 200 employees)</option>
+                <option>Mid-size (200–1,000 employees)</option>
+                <option>Large (1,000–10,000 employees)</option>
+                <option>Multinational (10,000+ employees)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primary Sponsorship Goal *</label>
+              <select name="sponsorship_goal" class="form-select" required>
+                <option value="">Select primary goal...</option>
+                <option>Employer Branding &amp; Talent Pipeline</option>
+                <option>CSR / Corporate Social Responsibility</option>
+                <option>Brand Visibility &amp; Marketing</option>
+                <option>Direct Access to Early-Career Talent</option>
+                <option>Platform Advertising (1M+ Filipino Scholars)</option>
+                <option>Multiple Goals</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Preferred Island Coverage</label>
+              <select name="island" class="form-select">
+                <option value="">Select...</option>
+                <option>Luzon Only</option>
+                <option>Visayas Only</option>
+                <option>Mindanao Only</option>
+                <option>All Three Islands (Full Coverage)</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Message or Questions</label>
+              <textarea name="message" class="form-textarea" placeholder="Tell us about your sponsorship goals, any specific requirements, or questions you have about the program..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="sponsor-submit">Request Sponsorship Meeting</button>
+          <p class="form-note">Our team will follow up with the full sponsorship deck and available tiers. Data collected in compliance with the Philippine Data Privacy Act of 2012.</p>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Anchor &amp; Ascend · Graduate to GREAT · 2026</div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Data Protection</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="footer-legal">
+    Powered by Ustle<br>
+    NPC-Compliant · DOLE-Aligned · DPA 2012
+  </div>
+</footer>
+
+<script>
+  /* Referral tracking — reads ?ref=PARTNERNAME from URL */
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref') || params.get('referred_by') || '';
+    if (ref) {
+      const field = document.getElementById('scholar-referred-by');
+      if (field) field.value = decodeURIComponent(ref);
+    }
+  })();
+
+  function showDay(day, btn) {
+    document.getElementById('day1-schedule').style.display = day === 1 ? 'block' : 'none';
+    document.getElementById('day2-schedule').style.display = day === 2 ? 'block' : 'none';
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function openForm(type) {
+    document.getElementById('pathways').style.display = 'none';
+    const section = document.getElementById('forms');
+    section.style.display = 'block';
+    ['scholar','partner','sponsor'].forEach(t => {
+      document.getElementById('form-' + t).classList.remove('active');
+    });
+    document.getElementById('form-' + type).classList.add('active');
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function closeForm() {
+    document.getElementById('forms').style.display = 'none';
+    document.getElementById('pathways').style.display = 'block';
+    document.getElementById('pathways').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleSubmit(event, type) {
+    event.preventDefault();
+    const form = event.target;
+    const btn = document.getElementById(type + '-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = 'none';
+        document.getElementById(type + '-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    }).catch(() => {
+      btn.textContent = 'Connection error — please try again';
+      btn.disabled = false;
+    });
+  }
+
+  /* Hide forms section on initial load */
+  document.getElementById('forms').style.display = 'none';
+</script>
+</body>
+</html>
