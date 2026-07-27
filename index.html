@@ -336,6 +336,41 @@
     font-size: 0.78rem; color: rgba(245,240,232,0.55); line-height: 1.6;
   }
   .inline-notice strong { color: rgba(201,168,76,0.8); font-weight: 500; }
+  /* File upload, section subhead, consent — added for scholar registration */
+  .form-file {
+    background: rgba(255,255,255,0.05); border: 1px dashed var(--border);
+    color: rgba(245,240,232,0.6); padding: 0.7rem 0.9rem;
+    font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 300;
+    border-radius: 2px; outline: none; cursor: pointer; transition: border-color 0.2s;
+  }
+  .form-file:hover, .form-file:focus { border-color: rgba(201,168,76,0.5); }
+  .form-file::file-selector-button {
+    background: rgba(201,168,76,0.15); color: var(--gold-light);
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 2px;
+    padding: 0.4rem 0.9rem; margin-right: 0.9rem; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .form-hint { font-size: 0.68rem; color: rgba(245,240,232,0.32); line-height: 1.5; }
+  .form-subhead {
+    grid-column: 1 / -1; margin-top: 0.8rem;
+    border-top: 1px solid var(--border); padding-top: 1.8rem;
+  }
+  .form-subhead-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+  .form-subhead-desc { font-size: 0.78rem; color: rgba(245,240,232,0.4); line-height: 1.6; }
+  .form-consent {
+    grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 0.75rem;
+    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 2px; padding: 1rem 1.1rem; margin-top: 0.6rem;
+  }
+  .form-consent input[type="checkbox"] {
+    margin-top: 0.15rem; width: 17px; height: 17px; accent-color: var(--gold);
+    flex-shrink: 0; cursor: pointer;
+  }
+  .form-consent label { font-size: 0.78rem; color: rgba(245,240,232,0.6); line-height: 1.65; cursor: pointer; }
 
   /* FOOTER */
   footer {
@@ -681,11 +716,10 @@
           <p class="form-success-title">Application Received</p>
           <p class="form-success-body">Thank you for applying. Your community partner will be in touch to confirm your slot. Watch your email for next steps.</p>
         </div>
-        <form id="scholar-form" action="https://formspree.io/f/REPLACE_SCHOLAR_ID" method="POST" onsubmit="handleSubmit(event, 'scholar')">
-          <input type="hidden" name="_subject" value="New Scholar Application — Graduate to GREAT 2026">
+        <form id="scholar-form" onsubmit="submitForm(event, 'scholar')">
           <input type="hidden" name="referred_by" id="scholar-referred-by">
           <div class="inline-notice">
-            <strong>Referred by a partner?</strong> If your school or organization sent you a link, your referral is automatically captured. Otherwise, please note your referring organization in the message field.
+            <strong>Referred by a partner?</strong> If your school or organization sent you a link, your referral is automatically captured. Otherwise, please note your referring organization in the fields below.
           </div>
           <div class="form-grid">
             <div class="form-group">
@@ -712,35 +746,87 @@
               <label class="form-label">Year Level *</label>
               <select name="year_level" class="form-select" required>
                 <option value="">Select...</option>
-                <option>1st Year</option>
-                <option>2nd Year</option>
-                <option>3rd Year</option>
-                <option>4th Year</option>
-                <option>5th Year</option>
-                <option>Graduate Student</option>
-                <option>Recent Graduate (0–2 years)</option>
+                <option>Graduating Class</option>
+                <option>Recent Fresh Graduate</option>
+                <option>1st Year of Career</option>
+                <option>2nd Year of Career</option>
+                <option>3rd Year of Career</option>
+                <option>4th Year of Career</option>
+                <option>5th Year of Career</option>
+              </select>
+            </div>
+
+            <!-- Hometown: Region -> Province -> City/Municipality -> rest of address -->
+            <div class="form-subhead">
+              <p class="form-subhead-title">Hometown</p>
+              <p class="form-subhead-desc">Select your region, then province, then city or municipality.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Region *</label>
+              <select name="region" id="scholar-region" class="form-select" required>
+                <option value="">Loading regions…</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Preferred Island *</label>
-              <select name="island" class="form-select" required>
-                <option value="">Select...</option>
-                <option>Luzon</option>
-                <option>Visayas</option>
-                <option>Mindanao</option>
+              <label class="form-label">Province *</label>
+              <select name="province" id="scholar-province" class="form-select" required disabled>
+                <option value="">Select region first</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Scholarship / Affiliation</label>
+              <label class="form-label">City / Municipality *</label>
+              <select name="city" id="scholar-city" class="form-select" required disabled>
+                <option value="">Select province first</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rest of Hometown Address</label>
+              <input type="text" name="hometown_detail" class="form-input" placeholder="Barangay, street, subdivision">
+            </div>
+
+            <!-- Scholarship -->
+            <div class="form-group">
+              <label class="form-label">Scholarship</label>
               <input type="text" name="scholarship" class="form-input" placeholder="DOST, CHED, Private, None">
             </div>
+            <div class="form-group">
+              <label class="form-label">Scholarship Proof (photo or PDF)</label>
+              <input type="file" name="scholarship_file" id="scholar-scholarship-file" class="form-file" accept="image/*,application/pdf">
+              <span class="form-hint">Upload a photo or PDF copy of your scholarship. Max 10&nbsp;MB.</span>
+            </div>
+
+            <!-- Documents & Profiles -->
+            <div class="form-subhead">
+              <p class="form-subhead-title">Documents &amp; Profiles</p>
+              <p class="form-subhead-desc">Help us get to know you and add you to the scholar community.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Attach CV</label>
+              <input type="file" name="cv_file" id="scholar-cv-file" class="form-file" accept=".pdf,.doc,.docx,image/*">
+              <span class="form-hint">Optional — PDF or Word document, max 10&nbsp;MB. You can also build your CV with us during the event.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">LinkedIn Profile</label>
+              <input type="url" name="linkedin" class="form-input" placeholder="https://linkedin.com/in/yourname">
+            </div>
             <div class="form-group full">
-              <label class="form-label">Why do you want to attend? *</label>
-              <textarea name="motivation" class="form-textarea" placeholder="Tell us what brought you here and what you hope to take away..." required></textarea>
+              <label class="form-label">Facebook Profile</label>
+              <input type="url" name="facebook" class="form-input" placeholder="https://facebook.com/yourname">
+              <span class="form-hint">Used to add you to the official Graduate to GREAT Facebook group.</span>
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label">What do you hope to take away from the event? *</label>
+              <textarea name="takeaway" class="form-textarea" placeholder="Tell us what you hope to learn, gain, or achieve by attending…" required></textarea>
+            </div>
+
+            <div class="form-consent">
+              <input type="checkbox" id="scholar-consent" name="data_privacy_consent" required>
+              <label for="scholar-consent">I consent to Graduate to GREAT collecting and processing my personal data and uploaded documents for the purpose of my application, in compliance with the Philippine Data Privacy Act of 2012 (RA 10173). My information will not be shared with third parties without my consent. *</label>
             </div>
           </div>
           <button type="submit" class="form-submit" id="scholar-submit">Submit Application</button>
-          <p class="form-note">Data collected in compliance with the Philippine Data Privacy Act of 2012. Your information will not be shared with third parties without your consent.</p>
+          <p class="form-note">Limited to 500 slots per major island. Applications are reviewed by your community partner.</p>
         </form>
       </div>
     </div>
@@ -760,8 +846,7 @@
           <p class="form-success-title">Inquiry Received</p>
           <p class="form-success-body">Thank you for your interest in partnering with us. Our team will reach out within 2 business days to discuss next steps.</p>
         </div>
-        <form id="partner-form" action="https://formspree.io/f/REPLACE_PARTNER_ID" method="POST" onsubmit="handleSubmit(event, 'partner')">
-          <input type="hidden" name="_subject" value="New Partner Inquiry — Graduate to GREAT 2026">
+        <form id="partner-form" onsubmit="submitForm(event, 'partner')">
           <div class="inline-notice">
             <strong>Partnerships are built on contribution, not transaction.</strong> Whether through scholar referrals, venue support, facilitation, community reach, or co-branding, every form of meaningful contribution is welcome. We honor each partner's context and design the arrangement accordingly.
           </div>
@@ -848,8 +933,7 @@
           <p class="form-success-title">Inquiry Received</p>
           <p class="form-success-body">Thank you for your interest in sponsoring Graduate to GREAT. Our team will be in touch within 2 business days with our sponsorship deck and available tiers.</p>
         </div>
-        <form id="sponsor-form" action="https://formspree.io/f/REPLACE_SPONSOR_ID" method="POST" onsubmit="handleSubmit(event, 'sponsor')">
-          <input type="hidden" name="_subject" value="New Sponsor Inquiry — Graduate to GREAT 2026">
+        <form id="sponsor-form" onsubmit="submitForm(event, 'sponsor')">
           <div class="inline-notice">
             <strong>Transparency is a core value of Graduate to GREAT.</strong> All program investments are structured with full accountability, directed precisely toward the initiatives and experiences that serve our scholars and the broader community.
           </div>
@@ -946,6 +1030,17 @@
 </footer>
 
 <script>
+  /* ============================================================
+     REGISTRATION BACKEND CONFIG
+     One Web App URL serves all three forms (Scholar / Partner /
+     Sponsor); each is written to its own tab in the same Google
+     Sheet. Paste the Google Apps Script Web App URL below after
+     deploying Code.gs (see DEPLOY.md). It looks like:
+     https://script.google.com/macros/s/AKfy..../exec
+     ============================================================ */
+  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwLoCSiNx2wqTV2b9bmTTuIFIuMMWkFBGx3LPjfgapJwIGnUQw-6ziTIDp7W8kWk9GV/exec';
+  const PSGC = 'https://psgc.gitlab.io/api';
+
   /* Referral tracking — reads ?ref=PARTNERNAME from URL */
   (function() {
     const params = new URLSearchParams(window.location.search);
@@ -980,30 +1075,160 @@
     document.getElementById('pathways').scrollIntoView({ behavior: 'smooth' });
   }
 
-  function handleSubmit(event, type) {
-    event.preventDefault();
-    const form = event.target;
-    const btn = document.getElementById(type + '-submit');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if (response.ok) {
-        form.style.display = 'none';
-        document.getElementById(type + '-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Something went wrong — please try again';
-        btn.disabled = false;
-      }
-    }).catch(() => {
-      btn.textContent = 'Connection error — please try again';
-      btn.disabled = false;
+  /* ============================================================
+     HOMETOWN CASCADING DROPDOWNS (Region → Province → City)
+     Data from the open PSGC API. If it is unreachable, the
+     affected dropdown gracefully degrades to a text field so
+     registration is never blocked.
+     ============================================================ */
+  function fillSelect(sel, items, placeholder) {
+    sel.innerHTML = '<option value="">' + placeholder + '</option>';
+    items.forEach(function(it) {
+      var o = document.createElement('option');
+      o.value = it.name; o.textContent = it.name; o.dataset.code = it.code;
+      sel.appendChild(o);
     });
   }
+  function selectToText(sel, ph) {
+    if (!sel || sel.tagName !== 'SELECT') return;
+    var input = document.createElement('input');
+    input.type = 'text'; input.className = 'form-input';
+    input.name = sel.name; input.id = sel.id; input.placeholder = ph;
+    if (sel.required) input.required = true;
+    sel.replaceWith(input);
+  }
+  function selCode(sel) {
+    return sel && sel.selectedOptions && sel.selectedOptions[0]
+      ? sel.selectedOptions[0].dataset.code : '';
+  }
+  async function loadRegions() {
+    var sel = document.getElementById('scholar-region');
+    try {
+      var data = await (await fetch(PSGC + '/regions/')).json();
+      data.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      fillSelect(sel, data, 'Select region…');
+    } catch (e) {
+      selectToText(document.getElementById('scholar-region'), 'Region');
+      selectToText(document.getElementById('scholar-province'), 'Province');
+      selectToText(document.getElementById('scholar-city'), 'City / Municipality');
+    }
+  }
+  async function onRegionChange() {
+    var prov = document.getElementById('scholar-province');
+    var city = document.getElementById('scholar-city');
+    if (!prov || prov.tagName !== 'SELECT') return;
+    var code = selCode(document.getElementById('scholar-region'));
+    prov.disabled = true; city.disabled = true;
+    city.innerHTML = '<option value="">Select province first</option>';
+    if (!code) { prov.innerHTML = '<option value="">Select region first</option>'; return; }
+    prov.innerHTML = '<option value="">Loading…</option>';
+    try {
+      var provs = await (await fetch(PSGC + '/regions/' + code + '/provinces/')).json();
+      if (provs.length === 0) {
+        /* NCR and similar regions have no provinces — load cities directly */
+        prov.innerHTML = '<option value="">Not applicable</option>';
+        prov.removeAttribute('required');
+        var ncrCities = await (await fetch(PSGC + '/regions/' + code + '/cities-municipalities/')).json();
+        ncrCities.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        fillSelect(city, ncrCities, 'Select city / municipality…');
+        city.disabled = false;
+      } else {
+        prov.setAttribute('required', '');
+        provs.sort(function(a, b) { return a.name.localeCompare(b.name); });
+        fillSelect(prov, provs, 'Select province…');
+        prov.disabled = false;
+      }
+    } catch (e) {
+      selectToText(prov, 'Province');
+      selectToText(city, 'City / Municipality');
+    }
+  }
+  async function onProvinceChange() {
+    var city = document.getElementById('scholar-city');
+    if (!city || city.tagName !== 'SELECT') return;
+    var code = selCode(document.getElementById('scholar-province'));
+    city.disabled = true;
+    if (!code) { city.innerHTML = '<option value="">Select province first</option>'; return; }
+    city.innerHTML = '<option value="">Loading…</option>';
+    try {
+      var cities = await (await fetch(PSGC + '/provinces/' + code + '/cities-municipalities/')).json();
+      cities.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      fillSelect(city, cities, 'Select city / municipality…');
+      city.disabled = false;
+    } catch (e) {
+      selectToText(city, 'City / Municipality');
+    }
+  }
+
+  /* ============================================================
+     SCHOLAR SUBMISSION — sends fields + files (base64) to the
+     Google Apps Script Web App, which writes a row to the Google
+     Sheet and saves files to Google Drive.
+     ============================================================ */
+  var MAX_FILE_BYTES = 10 * 1024 * 1024;
+  function readFileAsBase64(file) {
+    return new Promise(function(resolve, reject) {
+      var r = new FileReader();
+      r.onload = function() { resolve(String(r.result).split(',')[1]); };
+      r.onerror = reject;
+      r.readAsDataURL(file);
+    });
+  }
+  var FORM_LABELS = { scholar: 'Scholar Application', partner: 'Partner Inquiry', sponsor: 'Sponsor Inquiry' };
+  async function submitForm(event, type) {
+    event.preventDefault();
+    var form = event.target;
+    var btn = document.getElementById(type + '-submit');
+    var fileInputs = form.querySelectorAll('input[type="file"]');
+
+    for (var i = 0; i < fileInputs.length; i++) {
+      var f = fileInputs[i].files[0];
+      if (f && f.size > MAX_FILE_BYTES) {
+        btn.textContent = 'File too large (max 10MB): ' + f.name;
+        return;
+      }
+    }
+    if (!WEBAPP_URL || WEBAPP_URL.indexOf('PASTE_') === 0) {
+      btn.textContent = 'Form not connected yet — add the Web App URL';
+      return;
+    }
+
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    try {
+      var payload = { form_type: FORM_LABELS[type] || type, submitted_at: new Date().toISOString(), fields: {}, files: [] };
+      new FormData(form).forEach(function(v, k) {
+        if (!(v instanceof File)) payload.fields[k] = v;
+      });
+      var consent = form.querySelector('input[name="data_privacy_consent"]');
+      if (consent) payload.fields.data_privacy_consent = consent.checked ? 'Yes' : 'No';
+      for (var j = 0; j < fileInputs.length; j++) {
+        var file = fileInputs[j].files[0];
+        if (file) {
+          payload.files.push({
+            field: fileInputs[j].name,
+            filename: file.name,
+            mimeType: file.type || 'application/octet-stream',
+            data: await readFileAsBase64(file)
+          });
+        }
+      }
+      await fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+      form.style.display = 'none';
+      document.getElementById(type + '-success').style.display = 'block';
+    } catch (e) {
+      btn.textContent = 'Connection error — please try again';
+      btn.disabled = false;
+    }
+  }
+
+  /* Wire up cascading dropdowns and load regions */
+  (function() {
+    var region = document.getElementById('scholar-region');
+    var province = document.getElementById('scholar-province');
+    if (region) region.addEventListener('change', onRegionChange);
+    if (province) province.addEventListener('change', onProvinceChange);
+    loadRegions();
+  })();
 
   /* Hide forms section on initial load */
   document.getElementById('forms').style.display = 'none';
