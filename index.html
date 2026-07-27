@@ -881,35 +881,31 @@
                 <option>Other</option>
               </select>
             </div>
-            <div class="form-group">
-              <label class="form-label">Preferred Island *</label>
-              <select name="island" class="form-select" required>
-                <option value="">Select...</option>
-                <option>Luzon</option>
-                <option>Visayas</option>
-                <option>Mindanao</option>
-                <option>All Islands</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">How can you contribute? *</label>
-              <select name="contribution_type" class="form-select" required>
-                <option value="">Select primary contribution...</option>
-                <option>Scholar Referrals (nominate scholars from our network)</option>
-                <option>Venue &amp; Logistics Support</option>
-                <option>Facilitation &amp; Program Support</option>
-                <option>Community Reach &amp; Promotion</option>
-                <option>Co-Branding &amp; Advocacy</option>
-                <option>Multiple (I'll share more below)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Estimated Scholar Quota</label>
-              <input type="number" name="scholar_quota" class="form-input" placeholder="e.g. 25">
-            </div>
             <div class="form-group full">
-              <label class="form-label">Tell us about your organization and what you'd like to contribute *</label>
-              <textarea name="message" class="form-textarea" placeholder="Briefly describe your organization, the scholars or communities you serve, and how you envision contributing to Graduate to GREAT..." required></textarea>
+              <label class="form-label">Office Address</label>
+              <input type="text" name="office_address" class="form-input" placeholder="Building, street, city, province">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Website</label>
+              <input type="url" name="website" class="form-input" placeholder="https://organization.org">
+            </div>
+            <div class="form-group">
+              <label class="form-label">LinkedIn</label>
+              <input type="url" name="linkedin" class="form-input" placeholder="https://linkedin.com/company/...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Attach Brief</label>
+              <input type="file" name="brief_file" class="form-file" accept=".pdf,.doc,.docx,.ppt,.pptx,image/*">
+              <span class="form-hint">Company or partnership brief — PDF, Word, or deck. Max 10&nbsp;MB.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Earliest Availability for a Call</label>
+              <input type="datetime-local" name="earliest_call" class="form-input">
+              <span class="form-hint">We'll hold this slot on our team's calendar and confirm by email.</span>
+            </div>
+            <div class="form-consent">
+              <input type="checkbox" id="partner-consent" name="data_privacy_consent" required>
+              <label for="partner-consent">I consent to Graduate to GREAT collecting and processing the information and files submitted here for the purpose of this partnership inquiry, in compliance with the Philippine Data Privacy Act of 2012 (RA 10173). *</label>
             </div>
           </div>
           <button type="submit" class="form-submit" id="partner-submit">Submit Partner Inquiry</button>
@@ -971,16 +967,6 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Company Size</label>
-              <select name="company_size" class="form-select">
-                <option value="">Select...</option>
-                <option>SME (under 200 employees)</option>
-                <option>Mid-size (200–1,000 employees)</option>
-                <option>Large (1,000–10,000 employees)</option>
-                <option>Multinational (10,000+ employees)</option>
-              </select>
-            </div>
-            <div class="form-group">
               <label class="form-label">Primary Sponsorship Goal *</label>
               <select name="sponsorship_goal" class="form-select" required>
                 <option value="">Select primary goal...</option>
@@ -993,18 +979,29 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Preferred Island Coverage</label>
-              <select name="island" class="form-select">
-                <option value="">Select...</option>
-                <option>Luzon Only</option>
-                <option>Visayas Only</option>
-                <option>Mindanao Only</option>
-                <option>All Three Islands (Full Coverage)</option>
-              </select>
+              <label class="form-label">Website</label>
+              <input type="url" name="website" class="form-input" placeholder="https://company.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">LinkedIn</label>
+              <input type="url" name="linkedin" class="form-input" placeholder="https://linkedin.com/company/...">
             </div>
             <div class="form-group full">
-              <label class="form-label">Message or Questions</label>
-              <textarea name="message" class="form-textarea" placeholder="Tell us about your sponsorship goals, any specific requirements, or questions you have about the program..."></textarea>
+              <label class="form-label">Earliest Availability for a Call</label>
+              <input type="datetime-local" name="earliest_call" class="form-input">
+              <span class="form-hint">We'll hold this slot on our team's calendar and confirm by email.</span>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Why are you interested in Graduate to GREAT?</label>
+              <textarea name="interest" class="form-textarea" placeholder="Tell us what drew you to our offer and what you're hoping to achieve..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Additional Inquiry</label>
+              <textarea name="additional_inquiry" class="form-textarea" placeholder="Any other questions or specific requirements?"></textarea>
+            </div>
+            <div class="form-consent">
+              <input type="checkbox" id="sponsor-consent" name="data_privacy_consent" required>
+              <label for="sponsor-consent">I consent to Graduate to GREAT collecting and processing the information submitted here for the purpose of this sponsorship inquiry, in compliance with the Philippine Data Privacy Act of 2012 (RA 10173). *</label>
             </div>
           </div>
           <button type="submit" class="form-submit" id="sponsor-submit">Request Sponsorship Meeting</button>
@@ -1038,7 +1035,7 @@
      deploying Code.gs (see DEPLOY.md). It looks like:
      https://script.google.com/macros/s/AKfy..../exec
      ============================================================ */
-  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwLoCSiNx2wqTV2b9bmTTuIFIuMMWkFBGx3LPjfgapJwIGnUQw-6ziTIDp7W8kWk9GV/exec';
+  const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbyBdA3jYIF7t1wiKlegT2Y6lGZq2Crw8gaVrgORcb8lV2KhyhQTtyODfaPa6g1aF8NQ/exec';
   const PSGC = 'https://psgc.gitlab.io/api';
 
   /* Referral tracking — reads ?ref=PARTNERNAME from URL */
