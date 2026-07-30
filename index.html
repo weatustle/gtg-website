@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Graduate to GREAT 2026 | Anchor &amp; Ascend</title>
+<meta name="description" content="Graduate to GREAT 2026 — the Anchor &amp; Ascend Talent Accelerator Summit equipping Filipino scholars and fresh graduates with AI fluency, career confidence, and professional networks. Reserve your scholar slot.">
+<link rel="canonical" href="https://graduatetogreat.com/">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="theme-color" content="#0D1B2A">
+<!-- Open Graph / social share -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Graduate to GREAT">
+<meta property="og:url" content="https://graduatetogreat.com/">
+<meta property="og:title" content="Graduate to GREAT 2026 — Talent Accelerator Summit">
+<meta property="og:description" content="A pioneering summit equipping Filipino scholars and fresh graduates with AI fluency, career confidence, and networks. Reserve your scholar slot.">
+<meta property="og:image" content="https://graduatetogreat.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Graduate to GREAT 2026 — Talent Accelerator Summit">
+<meta name="twitter:description" content="A pioneering summit equipping Filipino scholars and fresh graduates with AI fluency, career confidence, and networks. Reserve your scholar slot.">
+<meta name="twitter:image" content="https://graduatetogreat.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -36,10 +53,12 @@
     border-bottom: 1px solid var(--border);
   }
   .nav-logo {
+    display: flex; align-items: center; gap: 0.6rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem; font-weight: 600;
     color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase;
   }
+  .nav-logo img { height: 34px; width: auto; display: block; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     color: var(--cream); opacity: 0.75; text-decoration: none;
@@ -415,7 +434,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo">Anchor &amp; Ascend</div>
+  <div class="nav-logo"><img src="/favicon.png" alt="Anchor & Ascend">Anchor &amp; Ascend</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#pillars">Program</a></li>
@@ -1229,6 +1248,18 @@
 
   /* Hide forms section on initial load */
   document.getElementById('forms').style.display = 'none';
+
+  /* Deep links: /scholar-application, /partner-inquiry, /sponsor-inquiry
+     open the matching form directly (each served from its own folder). */
+  (function() {
+    var routes = {
+      'scholar-application': 'scholar',
+      'partner-inquiry': 'partner',
+      'sponsor-inquiry': 'sponsor'
+    };
+    var seg = location.pathname.replace(/\/+$/, '').split('/').pop();
+    if (routes[seg]) openForm(routes[seg]);
+  })();
 </script>
 </body>
 </html>
