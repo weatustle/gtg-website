@@ -157,6 +157,16 @@
     font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
     color: rgba(245,240,232,0.45); margin-top: 0.3rem;
   }
+  .stat-live {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold); margin-right: 0.45rem; vertical-align: middle;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+    70%  { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+    100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+  }
 
   /* SECTION BASE */
   section { padding: 7rem 4rem; }
@@ -434,7 +444,7 @@
 <body>
 
 <nav>
-  <div class="nav-logo"><img src="/favicon.png" alt="Anchor & Ascend">Anchor &amp; Ascend</div>
+  <div class="nav-logo"><img src="/favicon.png" alt="" onerror="this.style.display='none'">Anchor &amp; Ascend</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#pillars">Program</a></li>
@@ -457,6 +467,10 @@
       <a href="#pathways" class="btn-primary">Get Involved</a>
     </div>
     <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" id="reg-count">266</span>
+        <span class="stat-label"><span class="stat-live"></span>Scholars Registered</span>
+      </div>
       <div class="stat-item">
         <span class="stat-num">1,500</span>
         <span class="stat-label">Reserved Access</span>
@@ -1259,6 +1273,21 @@
     };
     var seg = location.pathname.replace(/\/+$/, '').split('/').pop();
     if (routes[seg]) openForm(routes[seg]);
+  })();
+
+  /* Live registration count — pulls the scholar total from the Web App (JSONP). */
+  window.__g2gCount = function(data) {
+    var el = document.getElementById('reg-count');
+    if (el && data && typeof data.count === 'number' && data.count > 0) {
+      el.textContent = data.count.toLocaleString();
+    }
+  };
+  (function() {
+    if (!WEBAPP_URL || WEBAPP_URL.indexOf('PASTE_') === 0) return;
+    var s = document.createElement('script');
+    s.src = WEBAPP_URL + '?action=count&callback=__g2gCount';
+    s.async = true;
+    document.body.appendChild(s);
   })();
 </script>
 </body>
